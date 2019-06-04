@@ -1,0 +1,44 @@
+{
+  "extends": [
+    "airbnb"
+  ],
+  "globals": {
+    "App": true,
+    "Page": true,
+    "getApp": true,
+    "wx": true
+  },
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "sourceType": "module"
+  },
+  "rules": {
+    "func-names": "off",
+    "no-console": "error",
+    "no-continue": "off",
+    "no-plusplus": "off",
+    "no-restricted-syntax": [
+      "error",
+      "WithStatement",
+      "BinaryExpression[operator='in']"
+    ],
+    "object-curly-newline": [
+      "error",
+      {
+        "consistent": true
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "extensions": [
+          ".js",
+          ".json",
+          ".less",
+          ".scss"
+        ]
+      }
+    }
+  }
+}

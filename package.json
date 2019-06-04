@@ -1,92 +1,125 @@
 {
-	"name": "custom-view-samples",
-	"displayName": "Custom view Samples",
-	"description": "Samples for VSCode's view API",
-	"version": "0.0.1",
-	"publisher": "vscode-samples",
-	"enableProposedApi": true,
-	"engines": {
-		"vscode": "^1.32.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onView:h5Explorer",
-		"onView:weappExplorer",
-		"onLanguage:json",
-		"onLanguage:jsonc",
-		"onCommand:sample.reveal"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"viewsContainers": {
-			"activitybar": [
-				{
-					"id": "mai-ide",
-					"title": "Mai IDE",
-					"icon": "media/favicon.ico"
-				}
-			]
-		},
-		"views": {
-			"mai-ide": [
-				{
-					"id": "h5Explorer",
-					"name": "H5 v2"
-				},
-				{
-					"id": "weappExplorer",
-					"name": "微信小程序"
-				}
-			]
-		},
-		"commands": [
-			{
-				"command": "h5Explorer.refreshFile",
-				"title": "Refresh",
-				"icon": {
-					"light": "resources/light/refresh.svg",
-					"dark": "resources/dark/refresh.svg"
-				}
-			},
-			{
-				"command": "h5Explorer.openFile",
-				"title": "Open File"
-			},
-			{
-				"command": "weappExplorer.reveal",
-				"title": "Test View: Reveal"
-			}
-		],
-		"menus": {
-			"view/item/context": [
-				{
-					"command": "h5Explorer.refreshFile",
-					"when": "view == h5Explorer && viewItem == file",
-					"group": "inline"
-				}
-			]
-		}
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"lint": "tslint -p ./",
-		"watch": "tsc -watch -p ./"
-	},
-	"devDependencies": {
-		"@types/mkdirp": "^0.5.2",
-		"@types/node": "*",
-		"@types/rimraf": "^2.0.2",
-		"tslint": "^5.16.0",
-		"typescript": "^3.5.1",
-		"@types/vscode": "^1.32.0"
-	},
-	"dependencies": {
-		"jsonc-parser": "^0.4.2",
-		"ftp": "^0.3.10",
-		"mkdirp": "^0.5.1",
-		"rimraf": "^2.6.2"
-	}
+  "name": "weapp-finder",
+  "version": "0.0.1",
+  "description": "管理微信小程序项目",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:RobGu/vscode-weapp-finder.git"
+  },
+  "license": "MIT",
+  "main": "./out/extension.js",
+  "scripts": {
+    "compile": "babel -s -d out src",
+    "lint": "eslint src --fix",
+    "package": "vsce package --yarn",
+    "vscode:prepublish": "npm run compile",
+    "watch": "babel -w -s -d out src"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "ignore": [],
+    "linters": {
+      "*.{js,vue,ts}": [
+        "eslint --fix",
+        "git add"
+      ],
+      "*.{html,wxml,wxss,css,less,scss,sass,json}": [
+        "prettier --write",
+        "git add"
+      ],
+      "*.md": [
+        "markdownlint"
+      ]
+    }
+  },
+  "dependencies": {
+    "@babel/cli": "7.4.4",
+    "@babel/core": "7.4.5",
+    "@babel/plugin-transform-runtime": "7.4.4",
+    "@babel/preset-env": "7.4.5",
+    "@babel/register": "7.4.4",
+    "@types/node": "*",
+    "@types/vscode": "1.34.0",
+    "eslint": "5.16.0",
+    "eslint-config-airbnb": "17.1.0",
+    "eslint-import-resolver-alias": "1.1.2",
+    "eslint-plugin-import": "2.17.3",
+    "eslint-plugin-jsx-a11y": "6.2.1",
+    "eslint-plugin-react": "7.13.0",
+    "husky": "2.3.0",
+    "lint-staged": "8.1.7",
+    "lodash": "4.17.11",
+    "prettier": "1.17.1",
+    "vsce": "1.62.0"
+  },
+  "engines": {
+    "vscode": "^1.32.0"
+  },
+  "activationEvents": [
+    "onView:h5Explorer",
+    "onView:weappExplorer",
+    "onLanguage:json",
+    "onLanguage:jsonc",
+    "onCommand:sample.reveal"
+  ],
+  "categories": [
+    "Other"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "h5Explorer.refreshFile",
+        "icon": {
+          "dark": "resources/dark/refresh.svg",
+          "light": "resources/light/refresh.svg"
+        },
+        "title": "Refresh"
+      },
+      {
+        "command": "h5Explorer.openFile",
+        "title": "Open File"
+      },
+      {
+        "command": "weappExplorer.reveal",
+        "title": "Test View: Reveal"
+      }
+    ],
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "h5Explorer.refreshFile",
+          "group": "inline",
+          "when": "view == h5Explorer && viewItem == file"
+        }
+      ]
+    },
+    "views": {
+      "weapp-finder": [
+        {
+          "name": "H5 v2",
+          "id": "h5Explorer"
+        },
+        {
+          "name": "微信小程序",
+          "id": "weappExplorer"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "icon": "media/dep.svg",
+          "id": "weapp-finder",
+          "title": "小程序管理"
+        }
+      ]
+    }
+  },
+  "displayName": "小程序工程管理",
+  "enableProposedApi": true,
+  "publisher": "ggbb"
 }
