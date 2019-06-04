@@ -4,6 +4,9 @@ import * as vscode from 'vscode';
 
 import { DepNodeProvider, Dependency } from './nodeDependencies';
 import { JsonOutlineProvider } from './jsonOutline';
+import { FtpExplorer } from './ftpExplorer';
+import { FileExplorer } from './fileExplorer';
+import { TestView } from './testView';
 
 export function activate(context: vscode.ExtensionContext) {
 
@@ -22,4 +25,11 @@ export function activate(context: vscode.ExtensionContext) {
 	vscode.commands.registerCommand('jsonOutline.refreshNode', offset => jsonOutlineProvider.refresh(offset));
 	vscode.commands.registerCommand('jsonOutline.renameNode', offset => jsonOutlineProvider.rename(offset));
 	vscode.commands.registerCommand('extension.openJsonSelection', range => jsonOutlineProvider.select(range));
+
+	// Samples of `window.createView`
+	new FtpExplorer(context);
+	new FileExplorer(context);
+
+	// Test View
+	new TestView(context);
 }

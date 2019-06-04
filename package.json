@@ -13,7 +13,10 @@
 	],
 	"activationEvents": [
 		"onView:nodeDependencies",
+		"onView:ftpExplorer",
 		"onView:jsonOutline",
+		"onView:fileExplorer",
+		"onView:testView",
 		"onLanguage:json",
 		"onLanguage:jsonc",
 		"onCommand:sample.reveal"
@@ -23,24 +26,34 @@
 		"viewsContainers": {
 			"activitybar": [
 				{
-					"id": "package-explorer",
+					"id": "mai-proto-explorer",
 					"title": "Package Explorer",
-					"icon": "media/favicon.ico"
+					"icon": "media/dep.svg"
 				}
 			]
 		},
 		"views": {
-			"package-explorer": [
+			"mai-proto-explorer": [
 				{
 					"id": "nodeDependencies",
 					"name": "Node Dependencies"
-				}
-			],
-			"explorer": [
+				},
 				{
 					"id": "jsonOutline",
 					"name": "Json Outline",
 					"when": "jsonOutlineEnabled"
+				},
+				{
+					"id": "ftpExplorer",
+					"name": "FTP Explorer"
+				},
+				{
+					"id": "fileExplorer",
+					"name": "File Explorer"
+				},
+				{
+					"id": "testView",
+					"name": "Test View"
 				}
 			]
 		},
@@ -70,6 +83,22 @@
 				"title": "Delete"
 			},
 			{
+				"command": "ftpExplorer.refresh",
+				"title": "Refresh",
+				"icon": {
+					"light": "resources/light/refresh.svg",
+					"dark": "resources/dark/refresh.svg"
+				}
+			},
+			{
+				"command": "ftpExplorer.openFtpResource",
+				"title": "Open FTP Resource"
+			},
+			{
+				"command": "ftpExplorer.revealResource",
+				"title": "Reveal in FTP View"
+			},
+			{
 				"command": "jsonOutline.refresh",
 				"title": "Refresh",
 				"icon": {
@@ -88,9 +117,30 @@
 			{
 				"command": "jsonOutline.renameNode",
 				"title": "Rename"
+			},
+			{
+				"command": "fileExplorer.refreshFile",
+				"title": "Refresh",
+				"icon": {
+					"light": "resources/light/refresh.svg",
+					"dark": "resources/dark/refresh.svg"
+				}
+			},
+			{
+				"command": "fileExplorer.openFile",
+				"title": "Open File"
+			},
+			{
+				"command": "testView.reveal",
+				"title": "Test View: Reveal"
 			}
 		],
 		"menus": {
+			"commandPalette": [
+				{
+					"command": "ftpExplorer.revealResource"
+				}
+			],
 			"view/title": [
 				{
 					"command": "nodeDependencies.refreshEntry",
@@ -104,6 +154,11 @@
 				{
 					"command": "jsonOutline.refresh",
 					"when": "view == jsonOutline",
+					"group": "navigation"
+				},
+				{
+					"command": "ftpExplorer.refresh",
+					"when": "view == ftpExplorer",
 					"group": "navigation"
 				}
 			],
@@ -124,6 +179,11 @@
 				{
 					"command": "jsonOutline.refreshNode",
 					"when": "view == jsonOutline",
+					"group": "inline"
+				},
+				{
+					"command": "fileExplorer.refreshFile",
+					"when": "view == fileExplorer && viewItem == file",
 					"group": "inline"
 				}
 			]
