@@ -1,6 +1,6 @@
 {
   "name": "weapp-finder",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "管理微信小程序项目",
   "repository": {
     "type": "git",
@@ -15,28 +15,10 @@
     "vscode:prepublish": "npm run compile",
     "watch": "babel -w -s -d out src"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "ignore": [],
-    "linters": {
-      "*.{js,vue,ts}": [
-        "eslint --fix",
-        "git add"
-      ],
-      "*.{html,wxml,wxss,css,less,scss,sass,json}": [
-        "prettier --write",
-        "git add"
-      ],
-      "*.md": [
-        "markdownlint"
-      ]
-    }
-  },
   "dependencies": {
+    "lodash": "4.17.11"
+  },
+  "devDependencies": {
     "@babel/cli": "7.4.4",
     "@babel/core": "7.4.5",
     "@babel/plugin-transform-runtime": "7.4.4",
@@ -52,9 +34,7 @@
     "eslint-plugin-react": "7.13.0",
     "husky": "2.3.0",
     "lint-staged": "8.1.7",
-    "lodash": "4.17.11",
-    "prettier": "1.17.1",
-    "vsce": "1.62.0"
+    "prettier": "1.17.1"
   },
   "engines": {
     "vscode": "^1.32.0"
@@ -120,6 +100,5 @@
     }
   },
   "displayName": "小程序工程管理",
-  "enableProposedApi": true,
   "publisher": "ggbb"
 }
